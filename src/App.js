@@ -5,79 +5,95 @@ import "./App.css";
 
 //--------------------------------------------------------------------
 
-class App extends Component {
-  // bu bir sınıf bileşenidir.
-  //------------------------------------------------------------------------------------------------------------------
+const App = () => {
+  return (
+    <div className="App">
+      <h1 className="app-title">Monsters Rolodex</h1>
+      {/* <SearchBox
+        className="search-box"
+        onChangeHandler={onSearchChange}
+        placeholder={"search monsters"}
+      />
+      <CardList monsters={filteredMonsters} />
 
-  constructor() {
-    // app.js çalıştırıldığında ilk olarak bu method başlatılır,ardından render
-    //inşaatçi // yapıcı metod
-    super();
-    this.state = {
-      monsters: [],
-      searchField: "", //Bu arama alanı metni değişiklik üzerine.
-    };
-  }
+      <button onClick></button> */}
+    </div>
+  );
+};
 
-  //------------------------------------------------------------------------------------------------------------------
+// class App extends Component {
+//   // bu bir sınıf bileşenidir.
+//   //------------------------------------------------------------------------------------------------------------------
 
-  componentDidMount() {
-    //[yaşam döngüsü yöntemi  = lifecycle method]
+//   constructor() {
+//     // app.js çalıştırıldığında ilk olarak bu method başlatılır,ardından render
+//     //inşaatçi // yapıcı metod
+//     super();
+//     this.state = {
+//       monsters: [],
+//       searchField: "", //Bu arama alanı metni değişiklik üzerine.
+//     };
+//   }
 
-    fetch("https://jsonplaceholder.typicode.com/users") //Jsonu alıyorum ,[ fetch = gidip getirmek ]
-      .then((response) => response.json())
-      .then((users) =>
-        this.setState(() => {
-          //setState her çağrıldığında ,render tekrar çağrılır
-          return { monsters: users };
-        })
-      );
-  }
+//   //------------------------------------------------------------------------------------------------------------------
 
-  //------------------------------------------------------------------------------------------------------------------
+//   componentDidMount() {
+//     //[yaşam döngüsü yöntemi  = lifecycle method]
 
-  onSearchChange = (event) => {
-    // yaptığım diğer optimizasyon ise , render çağrısı yapıldığında gereksiz yere fazladan anonim fonksiyonlar oluşturmayarak uygulamayı biraz daha performanslı hale getirdim
-    // sınıf bileşenenmiz başlatıldığında yalnızca bir kez çağrılacak ve başlatılacak olan yönteme taşıdım.
-    const searchField = event.target.value.toLowerCase(); //toLowerCase ,tüm diziler üzerinde ,hepsini küçük harfe dönüştüren bir yöntemdir.
+//     fetch("https://jsonplaceholder.typicode.com/users") //Jsonu alıyorum ,[ fetch = gidip getirmek ]
+//       .then((response) => response.json())
+//       .then((users) =>
+//         this.setState(() => {
+//           //setState her çağrıldığında ,render tekrar çağrılır
+//           return { monsters: users };
+//         })
+//       );
+//   }
 
-    this.setState(() => {
-      return {
-        searchField,
-      };
-    });
-  };
+//   //------------------------------------------------------------------------------------------------------------------
 
-  //------------------------------------------------------------------------------------------------------------------
+//   onSearchChange = (event) => {
+//     // yaptığım diğer optimizasyon ise , render çağrısı yapıldığında gereksiz yere fazladan anonim fonksiyonlar oluşturmayarak uygulamayı biraz daha performanslı hale getirdim
+//     // sınıf bileşenenmiz başlatıldığında yalnızca bir kez çağrılacak ve başlatılacak olan yönteme taşıdım.
+//     const searchField = event.target.value.toLowerCase(); //toLowerCase ,tüm diziler üzerinde ,hepsini küçük harfe dönüştüren bir yöntemdir.
 
-  render() {
-    // Render ne gösterileceğini belirler. Kullanıcının arayüzünün ne olacağını belirler.
-    console.log("render from appJs");
-    //------------------------------------------------------------
-    const { monsters, searchField } = this.state; // iki büyük optimizasyon yaptım
-    const { onSearchChange } = this;
-    //------------------------------------------------------------
+//     this.setState(() => {
+//       return {
+//         searchField,
+//       };
+//     });
+//   };
 
-    const filteredMonsters = monsters.filter((monster) => {
-      // Canavarlarımızı arama alanından filtreliyoruz
-      return monster.name.toLowerCase().includes(searchField);
-    });
+//   //------------------------------------------------------------------------------------------------------------------
 
-    return (
-      <div className="App">
-        <h1 className="app-title">Monsters Rolodex</h1>
-        <SearchBox
-          className="search-box"
-          onChangeHandler={onSearchChange}
-          placeholder={"search monsters"}
-        />
-        <CardList monsters={filteredMonsters} />
+//   render() {
+//     // Render ne gösterileceğini belirler. Kullanıcının arayüzünün ne olacağını belirler.
+//     console.log("render from appJs");
+//     //------------------------------------------------------------
+//     const { monsters, searchField } = this.state; // iki büyük optimizasyon yaptım
+//     const { onSearchChange } = this;
+//     //------------------------------------------------------------
 
-        <button onClick></button>
-      </div>
-    );
-  }
-}
+//     const filteredMonsters = monsters.filter((monster) => {
+//       // Canavarlarımızı arama alanından filtreliyoruz
+//       return monster.name.toLowerCase().includes(searchField);
+//     });
+
+//     return (
+//       <div className="App">
+//         <h1 className="app-title">Monsters Rolodex</h1>
+//         <SearchBox
+//           className="search-box"
+//           onChangeHandler={onSearchChange}
+//           placeholder={"search monsters"}
+//         />
+//         <CardList monsters={filteredMonsters} />
+
+//         <button onClick></button>
+//       </div>
+//     );
+//   }
+// }
 
 //--------------------------------------------------------------------
 export default App;
