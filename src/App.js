@@ -10,7 +10,9 @@ import "./App.css";
 //--------------------------------------------------------------------
 
 const App = () => {
-  const [searchField, setSearchField] = useState(""); //İki değerden oluşan bir dizi verir.
+  console.log("render");
+
+  const [searchField, setSearchField] = useState("a"); //İki değerden oluşan bir dizi verir.
   console.log(searchField);
   // [value, setValue]
 
