@@ -1,19 +1,49 @@
-import { Component } from "react";
+import { useState } from "react";
+//"useState" Yerel durumu işlevsel bir bileşen içinde kapsülleme yeteneği verir
+
 import CardList from "./components/card-list/card-list.component";
+
 import SearchBox from "./components/search-box/search-box.component";
+
 import "./App.css";
 
 //--------------------------------------------------------------------
 
 const App = () => {
+  const [searchField, setSearchField] = useState(""); //İki değerden oluşan bir dizi verir.
+  console.log(searchField);
+  // [value, setValue]
+
+  //Temelde yaptığı şey,değişkenleri bir dizinin içindeki değerlere atamamıza izin vermektir.
+
+  // const arr = [2, 4];
+  // const [a, b] = arr;
+  // console.log(a); "2"
+  // console.log(b); "4"
+
+  //Yani burada yaptığımız şey tam olarak bu, durumumuz bize iki değerden oluşan bir dizi verir
+
+  //--------------------------------------------------------------------
+
+  const onSearchChange = (event) => {
+    const searchFieldString = event.target.value.toLowerCase();
+
+    setSearchField(searchFieldString);
+  };
+
+  //--------------------------------------------------------------------
+
   return (
     <div className="App">
       <h1 className="app-title">Monsters Rolodex</h1>
-      {/* <SearchBox
+
+      <SearchBox
         className="search-box"
         onChangeHandler={onSearchChange}
         placeholder={"search monsters"}
       />
+
+      {/* 
       <CardList monsters={filteredMonsters} />
 
       <button onClick></button> */}
