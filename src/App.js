@@ -1,34 +1,34 @@
-import { useState } from "react";
-//"useState" Yerel durumu işlevsel bir bileşen içinde kapsülleme yeteneği verir
-
+import { useState, useEffect } from "react";
 import CardList from "./components/card-list/card-list.component";
-
 import SearchBox from "./components/search-box/search-box.component";
-
 import "./App.css";
 
 //--------------------------------------------------------------------
 
 const App = () => {
-  console.log("render");
+  const [searchField, setSearchField] = useState("");
+  const [monsters, setMonsters] = useState([]);
+  const [filteredMonsters, setFilterMonsters] = useState(monsters);
 
-  const [searchField, setSearchField] = useState("a"); //İki değerden oluşan bir dizi verir.
-  console.log(searchField);
-  // [value, setValue]
+  //--------------------------------------------------------------------
 
-  //Temelde yaptığı şey,değişkenleri bir dizinin içindeki değerlere atamamıza izin vermektir.
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((users) => setMonsters(users));
+  }, []);
 
-  // const arr = [2, 4];
-  // const [a, b] = arr;
-  // console.log(a); "2"
-  // console.log(b); "4"
-
-  //Yani burada yaptığımız şey tam olarak bu, durumumuz bize iki değerden oluşan bir dizi verir
+  useEffect(() => {
+    const newFilteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchField);
+    });
+    setFilterMonsters(newFilteredMonsters);
+  }, [monsters, searchField]);
 
   //--------------------------------------------------------------------
 
   const onSearchChange = (event) => {
-    const searchFieldString = event.target.value.toLowerCase();
+    const searchFieldString = event.target.value.toLocaleLowerCase();
 
     setSearchField(searchFieldString);
   };
@@ -40,15 +40,12 @@ const App = () => {
       <h1 className="app-title">Monsters Rolodex</h1>
 
       <SearchBox
-        className="search-box"
+        className="monsters-search-box "
         onChangeHandler={onSearchChange}
         placeholder={"search monsters"}
       />
 
-      {/* 
       <CardList monsters={filteredMonsters} />
-
-      <button onClick></button> */}
     </div>
   );
 };
